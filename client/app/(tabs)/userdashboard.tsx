@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, FlatList, TouchableOpacity } from "react-native";
 import { FontAwesome, Feather } from "@expo/vector-icons";
 import styles from "../../styles/dashboard.styles";
+import { useRouter } from "expo-router"; // Import useRouter to navigate
 
 const customers = [
   { id: "1", name: "Trader", location: "Austin, TX" },
@@ -12,6 +13,8 @@ const customers = [
 
 export default function UserDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
+
+  const router = useRouter(); // Initialize the router
 
   // Filter customers based on searchTerm (case-insensitive)
   const filteredCustomers = customers.filter((customer) => {
@@ -33,9 +36,17 @@ export default function UserDashboard() {
 
       {/* Action Buttons */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.requestButton}>
-          <Text style={styles.requestText}>+ Request E-Waste Pickup</Text>
-        </TouchableOpacity>
+
+
+<TouchableOpacity 
+  style={styles.requestButton}
+  onPress={() => router.push("/screens/request")}
+>
+  <Text style={styles.requestText}>+ Request E-Waste Pickup</Text>
+</TouchableOpacity>
+
+ 
+
         <TouchableOpacity style={styles.storeButton}>
           <Text style={styles.storeText}>+ In Store</Text>
         </TouchableOpacity>
